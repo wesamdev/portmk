@@ -2,7 +2,7 @@ import os
 import subprocess
 import shutil
 import re
-import parser_godotver
+import parser_godotpck as godotpck
 
 
 def extract_version_info(pck_path,game_name):
@@ -33,16 +33,16 @@ def extract_version_info(pck_path,game_name):
         cleanup_temp_files(temp_pck_path, temp_dir)
         return None
     
-    foldergame = str(game_name).replace(" ","_")
-    os.makedirs(foldergame, exist_ok=True)
-    s = os.path.join(foldergame, 'pck.txt')
+    game_folder = str(game_name).replace(" ","_")
+    os.makedirs(game_folder, exist_ok=True)
+    s = os.path.join(game_folder, 'pck.txt')
     shutil.copy(version_txt_path, s)
 
     # Clean up temporary files
     cleanup_temp_files(temp_pck_path, temp_dir)
 
 
-    godot_ver, game_name_ = parser_godotver.parse(foldergame)
+    godot_ver, game_name_ = godotpck.parse(game_folder)
     print(godot_ver,"\n",game_name_)
 
 
@@ -56,5 +56,5 @@ def cleanup_temp_files(temp_pck_path, temp_dir):
     shutil.rmtree(temp_dir, ignore_errors=True)
 
 # # Example Usage:
-# pck_path = "y.pck"
-# extract_version_info(pck_path,"hi ff ff")
+pck_path = "y.pck"
+extract_version_info(pck_path,"hi ff ff")
