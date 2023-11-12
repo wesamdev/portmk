@@ -1,13 +1,10 @@
 import os
 import subprocess
 import shutil
-import re
 import parser_godotpck as godotpck
 
 
-def extract_version_info(pck_path,game_name):
-    version_info = {}
-
+def extract_pck_info(pck_path,game_name):
     # Create a temporary directory for extraction
     temp_dir = "temp_extraction"
     os.makedirs(temp_dir, exist_ok=True)
@@ -44,6 +41,7 @@ def extract_version_info(pck_path,game_name):
 
     godot_ver, game_name_ = godotpck.parse(game_folder)
     print(godot_ver,"\n",game_name_)
+    return godot_ver, game_name_
 
 
 
@@ -56,5 +54,5 @@ def cleanup_temp_files(temp_pck_path, temp_dir):
     shutil.rmtree(temp_dir, ignore_errors=True)
 
 # # Example Usage:
-pck_path = "y.pck"
-extract_version_info(pck_path,"hi ff ff")
+# pck_path = "y.pck"
+# extract_pck_info(pck_path,"hi ff ff")
