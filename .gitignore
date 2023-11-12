@@ -6,16 +6,6 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-bin/
-build/
-develop-eggs/
-dist/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
 env/
 *.egg-info/
 .installed.cfg
