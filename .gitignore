@@ -1,3 +1,8 @@
-# Byte-compiled / optimized / DLL files
-/__pycache__/*
-/env/*
+.idea
+__pycache__
+build
+dist
+env
+frogtool.spec
+tadpole.log
+*.spec
