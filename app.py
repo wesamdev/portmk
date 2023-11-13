@@ -149,7 +149,7 @@ window.title("PORTMK  Made by wesamdev   v0.1 alpha")
 
 
 #Setup Fonts
-pyglet.font.add_file("fonts/Poppins-Bold.ttf")
+pyglet.font.add_file(os.getcwd()+"\\fonts\\Poppins-Bold.ttf")
 font1 = ttk.font.Font(family="Poppins", size=12, weight="bold")
 font2= ttk.font.Font(family="Poppins", size=12, weight="normal")
 
