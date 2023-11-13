@@ -1,58 +1,45 @@
-import os
-import subprocess
-import shutil
-import parser_godotpck as godotpck
+import re
+from subprocess import run, PIPE
 
+def get_godot_info(pck_path):
+    # Specify the path to the GodotPCKExplorer.UI.exe executable
+    godot_pck_explorer_path = r"C:\Users\Wesam Almasruri\Downloads\GodotPCKExplorer\GodotPCKExplorer.UI.exe"
 
-def extract_pck_info(pck_path,game_name):
-    # Create a temporary directory for extraction
-    temp_dir = "temp_extraction"
-    os.makedirs(temp_dir, exist_ok=True)
+    # Construct the command to get pack file info
+    command = [godot_pck_explorer_path, '-i', pck_path]
 
-    # Copy the original .pck file to a temporary location
-    temp_pck_path = os.path.join(temp_dir, 'temp_file.7z')
-    shutil.copy(pck_path, temp_pck_path)
+    try:
+        # Execute the command and capture output
+        result = run(command, stdout=PIPE, stderr=PIPE)
 
-    # Extract contents using 7z command
-    extract_with_7z(temp_pck_path, temp_dir)
+        # Check if the command was successful
+        if result.returncode == 0:
+            # Decode the byte output to a string using UTF-16le encoding
+            decoded_output = result.stdout.decode('utf-16le')
 
-    # Check if .rsrc folder exists
-    rsrc_path = os.path.join(temp_dir, '.rsrc')
-    if not os.path.exists(rsrc_path):
-        print("The PCK file does not contain the expected .rsrc folder.")
-        cleanup_temp_files(temp_pck_path, temp_dir)
-        return None
+            print("Command output:")
+            print(decoded_output)
 
-    # Read version.txt from .rsrc folder
-    version_txt_path = os.path.join(rsrc_path, 'version.txt')  
-    if not os.path.exists(version_txt_path):
-        print("The PCK file does not contain the expected version.txt file.")
-        cleanup_temp_files(temp_pck_path, temp_dir)
-        return None
-    
-    game_folder = str(game_name).replace(" ","_")
-    os.makedirs(game_folder, exist_ok=True)
-    s = os.path.join(game_folder, 'pck.txt')
-    shutil.copy(version_txt_path, s)
+            # Define a regular expression pattern
+            pattern = r"Pack version (\d+). Godot version (\d+\.\d+\.\d+)"
 
-    # Clean up temporary files
-    cleanup_temp_files(temp_pck_path, temp_dir)
+            # Search for the pattern in the command output
+            match = re.search(pattern, decoded_output)
 
+            # Extract information
+            if match:
+                pack_version, godot_version = match.groups()
+                print(f"Pack Version: {pack_version}")
+                print(f"Godot Version: {godot_version}")
+                return godot_version, pack_version
+            else:
+                print("Failed to retrieve information from the command output.")
+        else:
+            print(f"Error executing command: {result.stderr}")
 
-    godot_ver, game_name_ = godotpck.parse(game_folder)
-    print(godot_ver,"\n",game_name_)
-    return godot_ver, game_name_
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-
-
-def extract_with_7z(archive_path, destination_path):
-    command = f"7z x {archive_path} -o{destination_path}"
-    subprocess.run(command, shell=True)
-
-def cleanup_temp_files(temp_pck_path, temp_dir):
-    # Delete the temporary directory
-    shutil.rmtree(temp_dir, ignore_errors=True)
-
-# # Example Usage:
-# pck_path = "y.pck"
-# extract_pck_info(pck_path,"hi ff ff")
+# Example usage
+pck_path = r"C:\Users\Wesam Almasruri\Documents\GitHub\portmk\y.pck"
+get_godot_info(pck_path)
