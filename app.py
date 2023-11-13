@@ -28,6 +28,13 @@ def browse_file():
 
 
 
+def browse_file_gptk():
+    file_path = filedialog.askopenfilename(title="Select a file", filetypes=[("gptokeyb files", "*.gptk")])
+    # Do something with the file_path, e.g., display it in an Entry widget
+    browse_file_gptk_Entry.delete(0, "end")
+    browse_file_gptk_Entry.insert(0, file_path)
+
+
 
 
 
@@ -79,6 +86,13 @@ browse_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButto
 browse_file_btn.place(x=11,y=190)
 
 
+
+browse_file_gptk_label = ttk.Label(window, text="Choose key Mapping File", font=font1)
+browse_file_gptk_label.place(x=11, y=242)
+browse_file_gptk_Entry = ttk.Entry(window, font=(font1, 16), width=30)
+browse_file_gptk_Entry.place(x=11,y=270)
+browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_gptk)
+browse_file_gptk_btn.place(x=11,y=313)
 
 # runtime_label = ttk.Label(window, text="Runtime", font=font1)
 # runtime_label.place(x=11, y=119)
