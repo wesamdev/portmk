@@ -1,7 +1,7 @@
 from ttkbootstrap.constants import *
 import ttkbootstrap as ttk
 import pyglet
-
+from tkinter import filedialog
 
 
 
@@ -19,7 +19,11 @@ def bulid():
 
 
 
-
+def browse_file():
+    file_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck, *.exe")])
+    # Do something with the file_path, e.g., display it in an Entry widget
+    browse_file_Entry.delete(0, "end")
+    browse_file_Entry.insert(0, file_path)
 
 
 
@@ -61,9 +65,18 @@ style1.configure("success.Outline.TButton", font=(font1, 14))
 
 gameTitle_label = ttk.Label(window, text="Game Title", font=font1)
 gameTitle_label.place(x=11, y=32)
-gametitle_Entry = ttk.Entry(window, font=(font1, 18))
+gametitle_Entry = ttk.Entry(window, font=(font1, 16))
 gametitle_Entry.place(x=11,y=60)
 
+
+
+
+browse_file_label = ttk.Label(window, text="Choose Game File", font=font1)
+browse_file_label.place(x=11, y=119)
+browse_file_Entry = ttk.Entry(window, font=(font1, 16), width=30)
+browse_file_Entry.place(x=11,y=147)
+browse_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file)
+browse_file_btn.place(x=11,y=190)
 
 
 
