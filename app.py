@@ -18,7 +18,7 @@ def build():
         file_name = file_name[:-4]
         file_name_ = file_name.replace(" ", "").lower()
 
-        _, file_extension = os.path.splitext(game_path)
+        # _, file_extension = os.path.splitext(game_path)
 
         # Create a directory using the file name
 
@@ -29,22 +29,25 @@ def build():
         os.mkdir(data_folder_path)
 
         if check:
-            if file_extension.lower() == '.exe':
-                # Copy the file to the destination folder
-                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                shutil.copy(game_path, destination_folder)
+            # if file_extension.lower() == '.x86_64':
+            #     # Copy the file to the destination folder
+            #     destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+            #     shutil.copy(game_path, destination_folder)
 
-                # Construct the paths for the source and destination files
-                source_file = os.path.join(destination_folder, file_name + '.exe')
-                destination_file = os.path.join(destination_folder, file_name + '.pck')
+            #     # Construct the paths for the source and destination files
+            #     source_file = os.path.join(destination_folder, file_name + '.x86_64')
+            #     destination_file = os.path.join(destination_folder, file_name + '.pck')
 
-                # Rename the copied file to have a ".pck" extension
-                os.rename(source_file, destination_file)
-                game_path = destination_file
-            else:
+            #     # Rename the copied file to have a ".pck" extension
+            #     os.rename(source_file, destination_file)
+            #     game_path = destination_file
+            # else:
                 # Copy the file to the destination folder
-                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                shutil.copy(game_path, destination_folder)
+                # destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                # shutil.copy(game_path, destination_folder)
+            destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+            shutil.copy(game_path, destination_folder)
+
 
             print(f"File copied and renamed to '{destination_folder}'")
 
@@ -114,7 +117,7 @@ def create_directory(directory_path):
 
 def browse_file():
     global game_path
-    game_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck, *.exe")])
+    game_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck")])
     # Do something with the file_path, e.g., display it in an Entry widget
     browse_file_Entry.delete(0, "end")
     browse_file_Entry.insert(0, game_path)
