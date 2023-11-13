@@ -1,9 +1,9 @@
 import re
 from subprocess import run, PIPE
-
+import os
 def get_godot_info(pck_path):
     # Specify the path to the GodotPCKExplorer.UI.exe executable
-    godot_pck_explorer_path = "\GodotPCKExplorer\GodotPCKExplorer.UI.exe"
+    godot_pck_explorer_path = os.getcwd()+"\\GodotPCKExplorer\\GodotPCKExplorer.UI.exe"
 
     # Construct the command to get pack file info
     command = [godot_pck_explorer_path, '-i', pck_path]
