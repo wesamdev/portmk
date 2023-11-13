@@ -3,7 +3,7 @@ from subprocess import run, PIPE
 
 def get_godot_info(pck_path):
     # Specify the path to the GodotPCKExplorer.UI.exe executable
-    godot_pck_explorer_path = r"C:\Users\Wesam Almasruri\Downloads\GodotPCKExplorer\GodotPCKExplorer.UI.exe"
+    godot_pck_explorer_path = "\GodotPCKExplorer\GodotPCKExplorer.UI.exe"
 
     # Construct the command to get pack file info
     command = [godot_pck_explorer_path, '-i', pck_path]
@@ -40,6 +40,4 @@ def get_godot_info(pck_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Example usage
-pck_path = r"C:\Users\Wesam Almasruri\Documents\GitHub\portmk\y.pck"
-get_godot_info(pck_path)
+
