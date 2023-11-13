@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "j.zip",
+  "items": [
+    "+.sh",
+    "j"
+  ],
+  "items_opt": [],
+  "attr": {
+    "title": "+",
+    "porter": [
+      "PORTMK"
+    ],
+    "desc": "NONE\n\n\nMade BY Portmk",
+    "inst": "none",
+    "genres": [
+      "other"
+    ],
+    "image": null,
+    "rtr": false,
+    "exp": true,
+    "runtime": "frt_`.squashfs",
+    "reqs": []
+  }
+}

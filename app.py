@@ -10,7 +10,6 @@ import godotpck
 
 
 
-
 def build():
     global game_path, map_path  # Assuming game_path and map_path are global variables
 
@@ -51,17 +50,21 @@ def build():
 
             # Get Godot version information
             godot_ver, _ = godotpck.get_godot_info(game_path)
-
+            frt_ver = get_version_frt(godot_ver)
             # Read the content of the script.txt file and replace placeholders
             with open("script.txt", "r") as script:
-                sh_script = script.read().replace("Z", godot_ver).replace("`", file_name_).replace("+", file_name)
+                sh_script = script.read().replace("Z", frt_ver).replace("`", file_name_).replace("+", file_name)
+            with open("template.port.json", "r") as port_json:
+                port_json = port_json.read().replace("`", frt_ver).replace("j", file_name_).replace("+", file_name)
 
             # Create a new file named 'godot_script.sh' in the destination folder
             script_file_path = os.path.join(destination_folder_, f'{file_name}.sh')
             with open(script_file_path, 'w') as script_file:
                 script_file.write(sh_script)
 
-
+            port_json_file_path = os.path.join(destination_folder, f'{file_name}.port.json')
+            with open(port_json_file_path, 'w') as port_json_file:
+                port_json_file.write(port_json)
 
             # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
             shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
@@ -69,6 +72,31 @@ def build():
             print(f"Script file and data copied to '{destination_folder}'")
 
 
+
+def get_version_frt(godot_version):
+    # Check if the godot_version contains the major version "4.0"
+    if "4.0" in godot_version:
+        return "4.0.4"
+    if "4.1" in godot_version:
+        return "4.1.3"
+
+    if "3.5" in godot_version:
+        return "3.5.2"
+    if "3.4" in godot_version:
+        return "3.4.5"
+
+    if "3.3" in godot_version:
+        return "3.3.4"
+    if "3.2" in godot_version:
+        return "3.2.3"
+
+    if "3.0" in godot_version:
+        return "3.0.6"
+    if "2.1" in godot_version:
+        return "2.1.6"
+
+    # Handle cases where the version string doesn't match the specific case above
+    return f"Invalid version format or not found in the mapping: {godot_version}"
 
 
 def create_directory(directory_path):
@@ -104,13 +132,13 @@ def browse_file_gptk():
     map_path = browse_file_gptk_Entry.get()
 
 
-def browse_file_json():
-    global json_path
-    json_path = filedialog.askopenfilename(title="Select a file", filetypes=[("PortMatser Json files", "*.port.json")])
-    # Do something with the file_path, e.g., display it in an Entry widget
-    browse_file_gptk_Entry.delete(0, "end")
-    browse_file_gptk_Entry.insert(0, json_path)
-    json_path = browse_file_gptk_Entry.get()
+# def browse_file_json():
+#     global json_path
+#     json_path = filedialog.askopenfilename(title="Select a file", filetypes=[("PortMatser Json files", "*.port.json")])
+#     # Do something with the file_path, e.g., display it in an Entry widget
+#     browse_file_gptk_Entry.delete(0, "end")
+#     browse_file_gptk_Entry.insert(0, json_path)
+#     json_path = browse_file_gptk_Entry.get()
 
 
 # Setup Window
@@ -145,12 +173,12 @@ style1.configure("success.Outline.TButton", font=(font1, 14))
 
 
 
-PortJson_label = ttk.Label(window, text="Select Game json", font=font1)
-PortJson_label.pack(pady=5)
-PortJson_Entry =ttk.Entry(window, font=(font1, 16), width=30)
-PortJson_Entry.pack(pady=3)
-PortJson_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_json)
-PortJson_file_btn.pack(pady=3)
+# PortJson_label = ttk.Label(window, text="Select Game json", font=font1)
+# PortJson_label.pack(pady=5)
+# PortJson_Entry =ttk.Entry(window, font=(font1, 16), width=30)
+# PortJson_Entry.pack(pady=3)
+# PortJson_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_json)
+# PortJson_file_btn.pack(pady=3)
 
 
 
