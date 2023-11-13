@@ -1,41 +1,116 @@
+import shutil
 from ttkbootstrap.constants import *
 import ttkbootstrap as ttk
 import pyglet
 from tkinter import filedialog
+import os
+import godotpck
 
 
 
 
 
 
+def build():
+    global game_path, map_path  # Assuming game_path and map_path are global variables
+
+    if game_path is not None and map_path is not None:
+        file_name = os.path.basename(game_path)
+        file_name = file_name[:-4]
+        file_name_ = file_name.replace(" ", "").lower()
+
+        _, file_extension = os.path.splitext(game_path)
+
+        # Create a directory using the file name
+
+        check = create_directory(file_name)
+                # Create a subfolder named 'data' in the destination folder
+        destination_folder_ = os.path.join(os.getcwd(), file_name)
+        data_folder_path = os.path.join(destination_folder_, file_name_)
+        os.mkdir(data_folder_path)
+
+        if check:
+            if file_extension.lower() == '.exe':
+                # Copy the file to the destination folder
+                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                shutil.copy(game_path, destination_folder)
+
+                # Construct the paths for the source and destination files
+                source_file = os.path.join(destination_folder, file_name + '.exe')
+                destination_file = os.path.join(destination_folder, file_name + '.pck')
+
+                # Rename the copied file to have a ".pck" extension
+                os.rename(source_file, destination_file)
+                game_path = destination_file
+            else:
+                # Copy the file to the destination folder
+                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                shutil.copy(game_path, destination_folder)
+
+            print(f"File copied and renamed to '{destination_folder}'")
+
+            # Get Godot version information
+            godot_ver, _ = godotpck.get_godot_info(game_path)
+
+            # Read the content of the script.txt file and replace placeholders
+            with open("script.txt", "r") as script:
+                sh_script = script.read().replace("Z", godot_ver).replace("`", file_name_).replace("+", file_name)
+
+            # Create a new file named 'godot_script.sh' in the destination folder
+            script_file_path = os.path.join(destination_folder_, f'{file_name}.sh')
+            with open(script_file_path, 'w') as script_file:
+                script_file.write(sh_script)
 
 
-def bulid():
-    pass
+
+            # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
+            shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
+
+            print(f"Script file and data copied to '{destination_folder}'")
 
 
 
+
+def create_directory(directory_path):
+    try:
+        # Create target directory
+        os.mkdir(directory_path)
+        print(f"Directory '{directory_path}' created successfully.")
+        return True
+    except FileExistsError:
+        print(f"Directory '{directory_path}' already exists.")
+        return False
 
 
 
 
 def browse_file():
-    file_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck, *.exe")])
+    global game_path
+    game_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck, *.exe")])
     # Do something with the file_path, e.g., display it in an Entry widget
     browse_file_Entry.delete(0, "end")
-    browse_file_Entry.insert(0, file_path)
+    browse_file_Entry.insert(0, game_path)
+    game_path = browse_file_Entry.get()
 
 
 
 
 def browse_file_gptk():
-    file_path = filedialog.askopenfilename(title="Select a file", filetypes=[("gptokeyb files", "*.gptk")])
+    global map_path
+    map_path = filedialog.askopenfilename(title="Select a file", filetypes=[("gptokeyb files", "*.gptk")])
     # Do something with the file_path, e.g., display it in an Entry widget
     browse_file_gptk_Entry.delete(0, "end")
-    browse_file_gptk_Entry.insert(0, file_path)
+    browse_file_gptk_Entry.insert(0, map_path)
+    map_path = browse_file_gptk_Entry.get()
 
 
-
+def browse_file_json():
+    global json_path
+    json_path = filedialog.askopenfilename(title="Select a file", filetypes=[("PortMatser Json files", "*.port.json")])
+    # Do something with the file_path, e.g., display it in an Entry widget
+    browse_file_gptk_Entry.delete(0, "end")
+    browse_file_gptk_Entry.insert(0, json_path)
+    json_path = browse_file_gptk_Entry.get()
 
 
 # Setup Window
@@ -70,29 +145,30 @@ style1.configure("success.Outline.TButton", font=(font1, 14))
 
 
 
-gameTitle_label = ttk.Label(window, text="Game Title", font=font1)
-gameTitle_label.place(x=11, y=32)
-gametitle_Entry = ttk.Entry(window, font=(font1, 16))
-gametitle_Entry.place(x=11,y=60)
-
+PortJson_label = ttk.Label(window, text="Select Game json", font=font1)
+PortJson_label.pack(pady=5)
+PortJson_Entry =ttk.Entry(window, font=(font1, 16), width=30)
+PortJson_Entry.pack(pady=3)
+PortJson_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_json)
+PortJson_file_btn.pack(pady=3)
 
 
 
 browse_file_label = ttk.Label(window, text="Choose Game File", font=font1)
-browse_file_label.place(x=11, y=119)
+browse_file_label.pack(pady=5)
 browse_file_Entry = ttk.Entry(window, font=(font1, 16), width=30)
-browse_file_Entry.place(x=11,y=147)
+browse_file_Entry.pack(pady=3)
 browse_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file)
-browse_file_btn.place(x=11,y=190)
+browse_file_btn.pack(pady=3)
 
 
 
 browse_file_gptk_label = ttk.Label(window, text="Choose key Mapping File", font=font1)
-browse_file_gptk_label.place(x=11, y=242)
+browse_file_gptk_label.pack(pady=5)
 browse_file_gptk_Entry = ttk.Entry(window, font=(font1, 16), width=30)
-browse_file_gptk_Entry.place(x=11,y=270)
+browse_file_gptk_Entry.pack(pady=3)
 browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_gptk)
-browse_file_gptk_btn.place(x=11,y=313)
+browse_file_gptk_btn.pack(pady=3)
 
 # runtime_label = ttk.Label(window, text="Runtime", font=font1)
 # runtime_label.place(x=11, y=119)
@@ -101,7 +177,7 @@ browse_file_gptk_btn.place(x=11,y=313)
 
 
 
-bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="success.Outline.TButton", width=8)
+bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="success.Outline.TButton", width=8, command=build)
 bulid_button.place(x=480,y=351)
 
 if __name__ == "__main__":
