@@ -173,7 +173,7 @@ def browse_file_gptk():
 window = ttk.Window(themename="darkly")
 window.geometry("600x400")
 window.resizable(False, False)
-window.title("PORTMK  Made by wesamdev   v0.1 alpha")
+window.title("PORTMK  Made by wesamdev   v0.1.2 alpha")
 
 
 #Setup Fonts
