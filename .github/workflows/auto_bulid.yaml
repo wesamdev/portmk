@@ -27,6 +27,10 @@ jobs:
     - name: Build executable
       run: |
         pyinstaller --onedir --console --icon "icon.ico" app.py
+        Copy-Item script.txt .\dist\app\script.txt
+        Copy-Item template.port.json .\dist\app\template.port.json
+        Copy-Item -Recurse GodotPCKExplorer .\dist\app\GodotPCKExplorer
+        Copy-Item -Recurse fonts .\dist\app\fonts
 
     - name: Extract version from version.txt
       id: extract_version
