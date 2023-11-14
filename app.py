@@ -1,5 +1,7 @@
 import shutil
 from ttkbootstrap.constants import *
+from ttkbootstrap.dialogs import Messagebox
+
 import ttkbootstrap as ttk
 import pyglet
 from tkinter import filedialog
@@ -22,11 +24,15 @@ def build():
 
         # Create a directory using the file name
 
-        check = create_directory(file_name)
-                # Create a subfolder named 'data' in the destination folder
-        destination_folder_ = os.path.join(os.getcwd(), file_name)
-        data_folder_path = os.path.join(destination_folder_, file_name_)
-        os.mkdir(data_folder_path)
+        try:
+            check = create_directory(file_name)
+                    # Create a subfolder named 'data' in the destination folder
+            destination_folder_ = os.path.join(os.getcwd(), file_name)
+            data_folder_path = os.path.join(destination_folder_, file_name_)
+            os.mkdir(data_folder_path)
+        except FileExistsError:
+            Messagebox.show_error("FileExists", title="PORTMK - FileExistsError")
+
 
         if check:
             # if file_extension.lower() == '.x86_64':
@@ -90,6 +96,8 @@ def build():
             shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
 
             print(f"Script file and data copied to '{destination_folder}'")
+            Messagebox.ok("Port Bulided!", title="PORTMK")
+
 
 
 
