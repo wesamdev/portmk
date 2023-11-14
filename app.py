@@ -60,6 +60,14 @@ def build():
             with open("template.port.json", "r") as port_json:
                 port_json = port_json.read().replace("`", frt_ver).replace("j", file_name_).replace("+", file_name)
 
+            with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
+                frt_LICENSE = frt_LICENSE.read()
+
+            with open("LICENSE.PORTMK.txt", "r") as portmk_LICENSE:
+                portmk_LICENSE = portmk_LICENSE.read()
+
+
+
             # Create a new file named 'godot_script.sh' in the destination folder
             script_file_path = os.path.join(destination_folder_, f'{file_name}.sh')
             with open(script_file_path, 'w') as script_file:
@@ -68,6 +76,15 @@ def build():
             port_json_file_path = os.path.join(destination_folder, f'{file_name}.port.json')
             with open(port_json_file_path, 'w') as port_json_file:
                 port_json_file.write(port_json)
+
+
+            frt_LICENSE_path  = os.path.join(destination_folder, f'LICENSE.FRT.txt')
+            with open(frt_LICENSE_path, 'w') as frt_LICENSE_path:
+                frt_LICENSE_path.write(frt_LICENSE)
+
+            portmk_LICENSE_path  = os.path.join(destination_folder, f'LICENSE.PORTMK.txt')
+            with open(portmk_LICENSE_path, 'w') as portmk_LICENSE_path:
+                portmk_LICENSE_path.write(portmk_LICENSE)
 
             # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
             shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
