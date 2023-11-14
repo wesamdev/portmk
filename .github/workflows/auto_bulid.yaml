@@ -58,11 +58,11 @@ jobs:
       with:
         python-version: 3.12  # Choose your Python version
 
-    - name: Build Changelog
-      id: github_release
-      uses: mikepenz/release-changelog-builder-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Build Changelog
+    #   id: github_release
+    #   uses: mikepenz/release-changelog-builder-action@v3
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Release
       uses: mikepenz/action-gh-release@v1 # or the latest version
@@ -70,4 +70,5 @@ jobs:
         files: dist/*
         tag_name: ${{ github.ref }}
         name: Release ${{ github.ref }}
-        body: ${{ steps.github_release.outputs.changelog }}
+        # body: ${{ steps.github_release.outputs.changelog }}
+        body: New Alpha Release please let us if you have problems
