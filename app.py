@@ -190,6 +190,9 @@ runtimes=  [
 #setup styles
 style1 = ttk.Style()
 style1.configure("success.Outline.TButton", font=(font1, 14))
+style2 = ttk.Style()
+style2.configure("primairy.Outline.TButton", font=(font1, 14))
+
 
 
 
@@ -225,8 +228,8 @@ browse_file_gptk_btn.pack(pady=3)
 
 
 
-bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="success.Outline.TButton", width=8, command=build)
-bulid_button.place(x=480,y=351)
+bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primairy.Outline.TButton", width=8, command=build)
+bulid_button.pack(pady=50)
 
 if __name__ == "__main__":
     window.mainloop()
