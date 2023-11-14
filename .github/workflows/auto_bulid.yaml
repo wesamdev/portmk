@@ -35,12 +35,13 @@ jobs:
     - name: Extract version from version.txt
       id: extract_version
       run: |
-        if [ -f "version.txt" ]; then
-          echo "::set-output name=version::$(cat version.txt)"
-        else
-          echo "version.txt not found."
+        if (Test-Path "version.txt") {
+          $version = Get-Content "version.txt"
+          Write-Host "##vso[task.setvariable variable=version]$version"
+        } else {
+          Write-Error "version.txt not found."
           exit 1
-        fi
+        }
 
   release:
     needs: build
@@ -69,8 +70,8 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: v${{ steps.extract_version.outputs.version }}
-        release_name: Release v${{ steps.extract_version.outputs.version }}
+        tag_name: v${{ env.version }}
+        release_name: Release v${{ env.version }}
         body: ${{ steps.changelog.outputs.changelog }}
         draft: false
         prerelease: true
@@ -78,5 +79,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: PORTMK-${{ steps.extract_version.outputs.version }}
+        name: PORTMK-${{ env.version }}
         path: dist
