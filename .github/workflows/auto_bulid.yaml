@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - '*.*.*'
 
 jobs:
   build:
@@ -45,8 +47,8 @@ jobs:
 
   release:
     needs: build
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -56,28 +58,16 @@ jobs:
       with:
         python-version: 3.12  # Choose your Python version
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install github-release-notes
+    - name: Build Changelog
+      id: github_release
+      uses: mikepenz/release-changelog-builder-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Get changelog
-      id: changelog
-      run: |
-        echo "::set-output name=changelog::$(github-release-notes ${{ secrets.GITHUB_TOKEN }})"
-
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
+    - name: Create Release
+      uses: mikepenz/action-gh-release@v0.2.0-a03 # or the latest version
       with:
-        tag_name: v${{ env.version }}
-        release_name: Release v${{ env.version }}
-        body: ${{ steps.changelog.outputs.changelog }}
-        draft: false
-        prerelease: true
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: PORTMK-${{ env.version }}
-        path: dist
+        files: dist/*
+        tag_name: ${{ github.ref }}
+        name: Release ${{ github.ref }}
+        body: ${{ steps.github_release.outputs.changelog }}
