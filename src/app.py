@@ -64,7 +64,7 @@ def build():
             with open("script.txt", "r") as script:
                 sh_script = script.read().replace("Z", frt_ver).replace("`", file_name_).replace("+", file_name)
             with open("template.port.json", "r") as port_json:
-                port_json = port_json.read().replace("`", frt_ver).replace("j", file_name_).replace("+", file_name)
+                port_json = port_json.read().replace("`", frt_ver).replace("j", file_name_).replace("+", file_name.capitalize())
 
             with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
                 frt_LICENSE = frt_LICENSE.read()
