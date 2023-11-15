@@ -96,7 +96,7 @@ def build():
             shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
 
             print(f"Script file and data copied to '{destination_folder}'")
-            Messagebox.ok("Port Bulided!", title="PORTMK")
+            Messagebox.ok("Port Builded!", title="PORTMK")
 
 
 
