@@ -86,9 +86,7 @@ def build():
             with open(frt_LICENSE_path, 'w') as frt_LICENSE_path:
                 frt_LICENSE_path.write(frt_LICENSE)
 
-            portmk_LICENSE_path  = os.path.join(destination_folder, f'LICENSE.PORTMK.txt')
-            with open(portmk_LICENSE_path, 'w') as portmk_LICENSE_path:
-                portmk_LICENSE_path.write(portmk_LICENSE)
+
 
             # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
             shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
