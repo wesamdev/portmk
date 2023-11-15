@@ -69,8 +69,6 @@ def build():
             with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
                 frt_LICENSE = frt_LICENSE.read()
 
-            with open("LICENSE.PORTMK.txt", "r") as portmk_LICENSE:
-                portmk_LICENSE = portmk_LICENSE.read()
 
 
 
