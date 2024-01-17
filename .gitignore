@@ -3,3 +3,4 @@
 *.pck
 /testing/
 *.zip
+/.venv/
