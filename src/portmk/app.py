@@ -47,16 +47,14 @@ def build():
                 # Rename the copied file to have a ".pck" extension
                 os.rename(source_file, destination_file)
                 game_path = destination_file
+                print(f"File copied and renamed to '{destination_folder}'")
             else:
                 #Copy the file to the destination folder
                 destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
                 shutil.copy(game_path, destination_folder)
+                print(f"File copied to '{destination_folder}'")
             
-            destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-            shutil.copy(game_path, destination_folder)
 
-
-            print(f"File copied and renamed to '{destination_folder}'")
 
             # Get Godot version information
             godot_ver, _ = godotpck.get_godot_info(game_path)
