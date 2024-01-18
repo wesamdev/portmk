@@ -23,26 +23,31 @@ jobs:
       working-directory: src/portmk
       run: |
         pip install -r requirements.txt
-    - name: Install Pyinstaller
+
+    - name: Install PyInstaller
       run: |
         pip install pyinstaller
-      
+
     - name: Copy Files
       working-directory: src/portmk
-
       run: |
-        mkdir -p build
-        cp -r fonts build/
-        cp -r GodotPCKExplorer build/
-        cp icon.ico build/
+        mkdir -p dist
+        cp -r fonts dist/
+        cp -r GodotPCKExplorer dist/
+        cp icon.ico dist/
 
     - name: Build
       working-directory: src/portmk
       run: |
-        pyinstaller --onefile --clean --icon icon.ico --windowed app.py
+        pyinstaller --onefile --clean --icon icon.ico --name Portmk app.py
+
+    - name: Move to Dist
+      working-directory: src/portmk
+      run: |
+        mv Portmk dist/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: app-artifact-${{ runner.os }}
-        path: src/portmk/build/
+        path: src/portmk/dist/
