@@ -34,8 +34,12 @@ def get_godot_info(pck_path):
                 return godot_version, pack_version
             else:
                 print("Failed to retrieve information from the command output.")
+                return False
         else:
             print(f"Error executing command: {result.stderr}")
+            return False
+
 
     except Exception as e:
         print(f"An error occurred: {e}")
+        return False

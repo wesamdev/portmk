@@ -57,7 +57,11 @@ def build():
 
 
             # Get Godot version information
-            godot_ver, _ = godotpck.get_godot_info(game_path)
+            if godotpck.get_godot_info(game_path) is not False:
+                godot_ver, _ = godotpck.get_godot_info(game_path)
+            else:
+                Messagebox.show_error("please download .net6 desktop runtime", title="PORTMK - Error in godotpckExp (EXPerror)")
+                return
             frt_ver = get_version_frt(godot_ver)
             # check if the version is valid
             if frt_ver ==  False:
@@ -164,7 +168,7 @@ def browse_file_gptk():
 window = ttk.Window(themename="darkly")
 window.geometry("600x400")
 window.resizable(False, False)
-window.title("PORTMK  v0.2 alpha")
+window.title("PORTMK  v0.2-dev")
 
 
 #Setup Fonts
@@ -213,7 +217,7 @@ bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primai
 bulid_button.pack(pady=50)
 
 #version text
-version_label = ttk.Label(window, text="v0.2 alpha", font=font1)
+version_label = ttk.Label(window, text="v0.2-dev", font=font1)
 version_label.pack(pady=2)
 
 if __name__ == "__main__":
