@@ -61,12 +61,13 @@ def build():
             frt_ver = get_version_frt(godot_ver)
             # check if the version is valid
             if frt_ver ==  False:
+                Messagebox.show_error("Invalid Godot version, portmk dose not support {0}".format(godot_ver), title="PORTMK - Invalid Godot version")
                 return
         # Read the content of the script.txt file and replace placeholders
             with open("script.txt", "r") as script:
-                sh_script = script.read().replace("Z", frt_ver).replace("`", file_name_).replace("+", file_name)
+                sh_script = script.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name)
             with open("template.port.json", "r") as port_json:
-                port_json = port_json.read().replace("`", frt_ver).replace("j", file_name_).replace("+", file_name.capitalize())
+                port_json = port_json.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name.capitalize())
 
             with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
                 frt_LICENSE = frt_LICENSE.read()

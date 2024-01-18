@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "name": "j.zip",
+  "name": "{NAME}.zip",
   "items": [
-    "+.sh",
-    "j"
+  "{SCRIPT_NAME}.sh",
+    "{NAME}"
   ],
   "items_opt": [],
   "attr": {
-    "title": "+",
+    "title": "{NAME++}",
     "porter": [
       "PORTMK"
     ],
@@ -19,7 +19,7 @@
     "image": null,
     "rtr": false,
     "exp": true,
-    "runtime": "frt_`.squashfs",
+    "runtime": "frt_{FRTVER}.squashfs",
     "reqs": []
   }
 }

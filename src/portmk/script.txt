@@ -12,7 +12,7 @@ source $controlfolder/control.txt
 
 get_controls
 
-GAMEDIR=/$directory/ports/`/
+GAMEDIR=/$directory/ports/{NAME}/
 CONFDIR="$GAMEDIR/conf/"
 
 # Ensure the conf directory exists
@@ -24,7 +24,7 @@ export XDG_DATA_HOME="$CONFDIR"
 
 cd $GAMEDIR
 
-runtime="frt_Z"
+runtime="frt_{FRTVER}"
 if [ ! -f "$controlfolder/libs/${runtime}.squashfs" ]; then
   # Check for runtime if not downloaded via PM
   if [ ! -f "$controlfolder/harbourmaster" ]; then
@@ -49,7 +49,7 @@ export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS # By default FRT sets Select 
 $ESUDO chmod 666 /dev/uinput
 $GPTOKEYB "$runtime" -c "./godot.gptk" &
 SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
-"$runtime" --main-pack "+.pck"
+"$runtime" --main-pack "{NAME++}.pck"
 
 $ESUDO umount "$godot_dir"
 $ESUDO kill -9 $(pidof gptokeyb)
