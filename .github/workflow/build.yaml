@@ -1,0 +1,45 @@
+name: Build App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+
+    - name: Install Dependencies
+      working-directory: src/portmk
+      run: |
+        pip install -r requirements.txt
+    - name: Install Pyinstaller
+      run: |
+        pip install pyinstaller
+      
+    - name: Copy Files
+      run: |
+        mkdir -p build
+        cp -r fonts build/
+        cp -r GodotPCKExplorer build/
+        cp icon.ico build/
+
+    - name: Build
+      run: |
+        pyinstaller --onefile --clean --icon icon.ico --name Portmk app.py
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-artifact-${{ runner.os }}
+        path: build/
