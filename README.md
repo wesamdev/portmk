@@ -4,7 +4,7 @@
 
 
 # PORTMK
- this is a tool used to make ports on [PORTMASTER](https://github.com/christianhaitian/PortMaster)
+ this is a tool used to make godot 3.0+ games on [PORTMASTER](https://github.com/christianhaitian/PortMaster)
 
 # Requirements
 .net v6 windows desktp runtime, [DOWNLOAD](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.24-windows-x64-installer)
