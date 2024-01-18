@@ -185,22 +185,13 @@ style2 = ttk.Style()
 style2.configure("primairy.Outline.TButton", font=(font1, 14))
 
 
-
-
-# PortJson_label = ttk.Label(window, text="Select Game json", font=font1)
-# PortJson_label.pack(pady=5)
-# PortJson_Entry =ttk.Entry(window, font=(font1, 16), width=30)
-# PortJson_Entry.pack(pady=3)
-# PortJson_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_json)
-# PortJson_file_btn.pack(pady=3)
-
-
+#logo label
 logo_label = ttk.Label(window, text="PORTMK", font=(font1, 28, "bold"))
 logo_label.pack(pady=3)
 
 
 
-
+# browse file game
 browse_file_label = ttk.Label(window, text="Choose Game File", font=font1)
 browse_file_label.pack(pady=10)
 browse_file_Entry = ttk.Entry(window, font=(font1, 16), width=30)
@@ -209,7 +200,7 @@ browse_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButto
 browse_file_btn.pack(pady=3)
 
 
-
+# browse file gptk
 browse_file_gptk_label = ttk.Label(window, text="Choose key Mapping File", font=font1)
 browse_file_gptk_label.pack(pady=8)
 browse_file_gptk_Entry = ttk.Entry(window, font=(font1, 16), width=30)
@@ -217,7 +208,7 @@ browse_file_gptk_Entry.pack(pady=3)
 browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_gptk)
 browse_file_gptk_btn.pack(pady=3)
 
-
+# author
 author_label = ttk.Label(window, text="Author", font=font1)
 author_label.pack(pady=8)
 author_label_Entry = ttk.Entry(window, font=(font1, 16), width=30)
