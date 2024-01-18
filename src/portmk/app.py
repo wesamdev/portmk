@@ -129,7 +129,7 @@ def get_version_frt(godot_version):
         return "3.2.3"
 
     if "3.0" in godot_version:
-        return "3.0.6"
+        return "3.0.6_v1"
     
     #remove support for 2.1
     # if "2.1" in godot_version:
