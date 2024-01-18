@@ -37,6 +37,10 @@ jobs:
         cp -r fonts dist/
         cp -r GodotPCKExplorer dist/
         cp icon.ico dist/
+        cp LICENSE.FRT.txt dist/
+        cp script.txt dist/
+        cp template.port.json dist/
+
 
     - name: Build
       working-directory: src/portmk
