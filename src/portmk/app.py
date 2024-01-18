@@ -167,7 +167,7 @@ def browse_file_gptk():
 
 # Setup Window
 window = ttk.Window(themename="darkly")
-window.geometry("600x400")
+window.geometry("800x600")
 window.resizable(False, False)
 window.title("PORTMK  v0.2-dev")
 
@@ -195,9 +195,14 @@ style2.configure("primairy.Outline.TButton", font=(font1, 14))
 # PortJson_file_btn.pack(pady=3)
 
 
+logo_label = ttk.Label(window, text="PORTMK", font=(font1, 28, "bold"))
+logo_label.pack(pady=3)
+
+
+
 
 browse_file_label = ttk.Label(window, text="Choose Game File", font=font1)
-browse_file_label.pack(pady=5)
+browse_file_label.pack(pady=10)
 browse_file_Entry = ttk.Entry(window, font=(font1, 16), width=30)
 browse_file_Entry.pack(pady=3)
 browse_file_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file)
@@ -206,12 +211,17 @@ browse_file_btn.pack(pady=3)
 
 
 browse_file_gptk_label = ttk.Label(window, text="Choose key Mapping File", font=font1)
-browse_file_gptk_label.pack(pady=5)
+browse_file_gptk_label.pack(pady=8)
 browse_file_gptk_Entry = ttk.Entry(window, font=(font1, 16), width=30)
 browse_file_gptk_Entry.pack(pady=3)
 browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_gptk)
 browse_file_gptk_btn.pack(pady=3)
 
+
+author_label = ttk.Label(window, text="Author", font=font1)
+author_label.pack(pady=8)
+author_label_Entry = ttk.Entry(window, font=(font1, 16), width=30)
+author_label_Entry.pack(pady=3)
 
 #bulid button
 bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primairy.Outline.TButton", width=8, command=build)
