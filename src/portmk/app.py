@@ -19,7 +19,6 @@ def build():
         file_name = file_name[:-4]
         file_name_ = file_name.replace(" ", "").lower()
 
-        # _, file_extension = os.path.splitext(game_path)
 
         # Create a directory using the file name
 
@@ -34,7 +33,9 @@ def build():
 
 
         if check:
+            # _, file_extension = os.path.splitext(game_path)
             file_extension = os.path.splitext(game_path)[1]
+            author = author_Entry.get()
             if file_extension.lower() == '.x86_64':
                 # Copy the file to the destination folder
                 destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
@@ -71,7 +72,7 @@ def build():
             with open("script.txt", "r") as script:
                 sh_script = script.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name)
             with open("template.port.json", "r") as port_json:
-                port_json = port_json.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name.capitalize())
+                port_json = port_json.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name.capitalize()).replace("{AUTHOR}", author)
 
             with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
                 frt_LICENSE = frt_LICENSE.read()
@@ -211,8 +212,8 @@ browse_file_gptk_btn.pack(pady=3)
 # author
 author_label = ttk.Label(window, text="Author", font=font1)
 author_label.pack(pady=8)
-author_label_Entry = ttk.Entry(window, font=(font1, 16), width=30)
-author_label_Entry.pack(pady=3)
+author_Entry = ttk.Entry(window, font=(font1, 16), width=30)
+author_Entry.pack(pady=3)
 
 #bulid button
 bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primairy.Outline.TButton", width=8, command=build)
