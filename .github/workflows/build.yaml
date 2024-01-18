@@ -39,7 +39,7 @@ jobs:
     - name: Build
       working-directory: src/portmk
       run: |
-        pyinstaller --onefile --clean --icon icon.ico --name Portmk app.py
+        pyinstaller --onefile --clean --icon icon.ico --windowed app.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
