@@ -39,5 +39,3 @@ def get_godot_info(pck_path):
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
-

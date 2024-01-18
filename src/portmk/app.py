@@ -73,8 +73,6 @@ def build():
                 frt_LICENSE = frt_LICENSE.read()
 
 
-
-
             # Create a new file named 'godot_script.sh' in the destination folder
             script_file_path = os.path.join(destination_folder_, f'{file_name.capitalize()}.sh')
             with open(script_file_path, 'w') as script_file:
