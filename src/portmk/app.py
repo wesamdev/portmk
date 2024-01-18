@@ -34,22 +34,23 @@ def build():
 
 
         if check:
-            # if file_extension.lower() == '.x86_64':
-            #     # Copy the file to the destination folder
-            #     destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-            #     shutil.copy(game_path, destination_folder)
-
-            #     # Construct the paths for the source and destination files
-            #     source_file = os.path.join(destination_folder, file_name + '.x86_64')
-            #     destination_file = os.path.join(destination_folder, file_name + '.pck')
-
-            #     # Rename the copied file to have a ".pck" extension
-            #     os.rename(source_file, destination_file)
-            #     game_path = destination_file
-            # else:
+            file_extension = os.path.splitext(game_path)[1]
+            if file_extension.lower() == '.x86_64':
                 # Copy the file to the destination folder
-                # destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                # shutil.copy(game_path, destination_folder)
+                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                shutil.copy(game_path, destination_folder)
+
+                # Construct the paths for the source and destination files
+                source_file = os.path.join(destination_folder, file_name + '.x86_64')
+                destination_file = os.path.join(destination_folder, file_name + '.pck')
+
+                # Rename the copied file to have a ".pck" extension
+                os.rename(source_file, destination_file)
+                game_path = destination_file
+            else:
+                #Copy the file to the destination folder
+                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                shutil.copy(game_path, destination_folder)
             
             destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
             shutil.copy(game_path, destination_folder)
