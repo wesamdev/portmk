@@ -230,7 +230,7 @@ bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primai
 bulid_button.pack(pady=50)
 
 #version text
-version_label = ttk.Label(window, text="v0.2 alpha", font=font2)
+version_label = ttk.Label(window, text="v0.2 alpha", font=font1)
 version_label.pack(pady=2)
 
 if __name__ == "__main__":
