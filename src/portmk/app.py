@@ -103,11 +103,12 @@ def build():
 
 
 def get_version_frt(godot_version):
-    # Check if the godot_version contains the major version "4.0"
-    if "4.0" in godot_version:
-        return "4.0.4"
-    if "4.1" in godot_version:
-        return "4.1.3"
+    
+    #expermintally added
+    # if "4.0" in godot_version:
+    #     return "4.0.4"
+    # if "4.1" in godot_version:
+    #     return "4.1.3"
 
     if "3.5" in godot_version:
         return "3.5.2"
