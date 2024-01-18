@@ -228,7 +228,7 @@ bulid_button.pack(pady=50)
 
 #version text
 version_label = ttk.Label(window, text="v0.2-dev", font=font1)
-version_label.pack(pady=2)
+version_label.pack(pady=24)
 
 if __name__ == "__main__":
     window.mainloop()
