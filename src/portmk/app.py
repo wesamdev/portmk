@@ -1,7 +1,6 @@
 import shutil
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import Messagebox
-
 import ttkbootstrap as ttk
 import pyglet
 from tkinter import filedialog
@@ -51,6 +50,7 @@ def build():
                 # Copy the file to the destination folder
                 # destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
                 # shutil.copy(game_path, destination_folder)
+            
             destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
             shutil.copy(game_path, destination_folder)
 
@@ -60,7 +60,10 @@ def build():
             # Get Godot version information
             godot_ver, _ = godotpck.get_godot_info(game_path)
             frt_ver = get_version_frt(godot_ver)
-            # Read the content of the script.txt file and replace placeholders
+            # check if the version is valid
+            if frt_ver ==  False:
+                return
+        # Read the content of the script.txt file and replace placeholders
             with open("script.txt", "r") as script:
                 sh_script = script.read().replace("Z", frt_ver).replace("`", file_name_).replace("+", file_name)
             with open("template.port.json", "r") as port_json:
@@ -116,11 +119,13 @@ def get_version_frt(godot_version):
 
     if "3.0" in godot_version:
         return "3.0.6"
-    if "2.1" in godot_version:
-        return "2.1.6"
+    
+    #remove support for 2.1
+    # if "2.1" in godot_version:
+    #     return "2.1.6"
 
     # Handle cases where the version string doesn't match the specific case above
-    return f"Invalid version format or not found in the mapping: {godot_version}"
+    return False
 
 
 def create_directory(directory_path):
@@ -156,20 +161,12 @@ def browse_file_gptk():
     map_path = browse_file_gptk_Entry.get()
 
 
-# def browse_file_json():
-#     global json_path
-#     json_path = filedialog.askopenfilename(title="Select a file", filetypes=[("PortMatser Json files", "*.port.json")])
-#     # Do something with the file_path, e.g., display it in an Entry widget
-#     browse_file_gptk_Entry.delete(0, "end")
-#     browse_file_gptk_Entry.insert(0, json_path)
-#     json_path = browse_file_gptk_Entry.get()
-
 
 # Setup Window
 window = ttk.Window(themename="darkly")
 window.geometry("600x400")
 window.resizable(False, False)
-window.title("PORTMK  Made by wesamdev   v0.1.2 alpha")
+window.title("PORTMK  v0.2 alpha")
 
 
 #Setup Fonts
@@ -231,9 +228,13 @@ browse_file_gptk_btn.pack(pady=3)
 # runtime_combobox.place(x=11,y=147)
 
 
-
+#bulid button
 bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primairy.Outline.TButton", width=8, command=build)
 bulid_button.pack(pady=50)
+
+#version text
+version_label = ttk.Label(window, text="v0.2 alpha", font=font2)
+version_label.pack(pady=2)
 
 if __name__ == "__main__":
     window.mainloop()
