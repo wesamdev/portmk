@@ -12,95 +12,102 @@ import godotpck
 
 
 def build():
-    global game_path, map_path  # Assuming game_path and map_path are global variables
-
-    if game_path is not None and map_path is not None:
-        file_name = os.path.basename(game_path)
-        file_name = file_name[:-4]
-        file_name_ = file_name.replace(" ", "").lower()
-
-
-        # Create a directory using the file name
-
-        try:
-            check = create_directory(file_name)
-                    # Create a subfolder named 'data' in the destination folder
-            destination_folder_ = os.path.join(os.getcwd(), file_name)
-            data_folder_path = os.path.join(destination_folder_, file_name_)
-            os.mkdir(data_folder_path)
-        except FileExistsError:
-            Messagebox.show_error("FileExists", title="PORTMK - FileExistsError")
-
-
-        if check:
-            # _, file_extension = os.path.splitext(game_path)
-            file_extension = os.path.splitext(game_path)[1]
-            author = author_Entry.get()
-            if file_extension.lower() == '.x86_64':
-                # Copy the file to the destination folder
-                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                shutil.copy(game_path, destination_folder)
-
-                # Construct the paths for the source and destination files
-                source_file = os.path.join(destination_folder, file_name + '.x86_64')
-                destination_file = os.path.join(destination_folder, file_name + '.pck')
-
-                # Rename the copied file to have a ".pck" extension
-                os.rename(source_file, destination_file)
-                game_path = destination_file
-                print(f"File copied and renamed to '{destination_folder}'")
-            else:
-                #Copy the file to the destination folder
-                destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                shutil.copy(game_path, destination_folder)
-                print(f"File copied to '{destination_folder}'")
-            
-
-
-            # Get Godot version information
-            if godotpck.get_godot_info(game_path) is not False:
-                godot_ver, _ = godotpck.get_godot_info(game_path)
-            else:
-                Messagebox.show_error("please download .net6 desktop runtime", title="PORTMK - Error in godotpckExp (EXPerror)")
+    global game_path, map_path, author  # Assuming game_path and map_path are global variables
+    game_path = browse_file_Entry.get()
+    map_path = browse_file_gptk_Entry.get()
+    author = author_Entry.get()
+    try:
+        if game_path != '' and map_path != '' and author != '':
+            if  os.path.isfile(game_path) is not True and os.path.isfile(map_path) is not True:
+                Messagebox.show_error("FileNotFound, please verfiy the path", title="PORTMK - FileNotFound")
                 return
-            frt_ver = get_version_frt(godot_ver)
-            # check if the version is valid
-            if frt_ver ==  False:
-                Messagebox.show_error("Invalid Godot version, portmk dose not support {0}".format(godot_ver), title="PORTMK - Invalid Godot version")
-                return
-        # Read the content of the script.txt file and replace placeholders
-            with open("script.txt", "r") as script:
-                sh_script = script.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name)
-            with open("template.port.json", "r") as port_json:
-                port_json = port_json.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name.capitalize()).replace("{AUTHOR}", author)
-
-            with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
-                frt_LICENSE = frt_LICENSE.read()
+            file_name = os.path.basename(game_path)
+            file_name = file_name[:-4]
+            file_name_ = file_name.replace(" ", "").lower()
 
 
-            # Create a new file named 'godot_script.sh' in the destination folder
-            script_file_path = os.path.join(destination_folder_, f'{file_name.capitalize()}.sh')
-            with open(script_file_path, 'w') as script_file:
-                script_file.write(sh_script)
+            # Create a directory using the file name
 
-            port_json_file_path = os.path.join(destination_folder, f'{file_name}.port.json')
-            with open(port_json_file_path, 'w') as port_json_file:
-                port_json_file.write(port_json)
-
-
-            frt_LICENSE_path  = os.path.join(destination_folder, f'LICENSE.FRT.txt')
-            with open(frt_LICENSE_path, 'w') as frt_LICENSE_path:
-                frt_LICENSE_path.write(frt_LICENSE)
+            try:
+                check = create_directory(file_name)
+                        # Create a subfolder named 'data' in the destination folder
+                destination_folder_ = os.path.join(os.getcwd(), file_name)
+                data_folder_path = os.path.join(destination_folder_, file_name_)
+                os.mkdir(data_folder_path)
+            except FileExistsError:
+                Messagebox.show_error("FileExists", title="PORTMK - FileExistsError")
 
 
+            if check:
+                # _, file_extension = os.path.splitext(game_path)
+                file_extension = os.path.splitext(game_path)[1]
+                author = author_Entry.get()
+                if file_extension.lower() == '.x86_64':
+                    # Copy the file to the destination folder
+                    destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    shutil.copy(game_path, destination_folder)
 
-            # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
-            shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
+                    # Construct the paths for the source and destination files
+                    source_file = os.path.join(destination_folder, file_name + '.x86_64')
+                    destination_file = os.path.join(destination_folder, file_name + '.pck')
 
-            print(f"Script file and data copied to '{destination_folder}'")
-            Messagebox.ok("Port Builded!", title="PORTMK")
+                    # Rename the copied file to have a ".pck" extension
+                    os.rename(source_file, destination_file)
+                    game_path = destination_file
+                    print(f"File copied and renamed to '{destination_folder}'")
+                else:
+                    #Copy the file to the destination folder
+                    destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    shutil.copy(game_path, destination_folder)
+                    print(f"File copied to '{destination_folder}'")
+                
 
 
+                # Get Godot version information
+                if godotpck.get_godot_info(game_path) is not False:
+                    godot_ver, _ = godotpck.get_godot_info(game_path)
+                else:
+                    Messagebox.show_error("please download .net6 desktop runtime", title="PORTMK - Error in godotpckExp (EXPerror)")
+                    return
+                frt_ver = get_version_frt(godot_ver)
+                # check if the version is valid
+                if frt_ver ==  False:
+                    Messagebox.show_error("Invalid Godot version, portmk dose not support {0}".format(godot_ver), title="PORTMK - Invalid Godot version")
+                    return
+            # Read the content of the script.txt file and replace placeholders
+                with open("script.txt", "r") as script:
+                    sh_script = script.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name)
+                with open("template.port.json", "r") as port_json:
+                    port_json = port_json.read().replace("{FRTVER}", frt_ver).replace("{NAME}", file_name_).replace("{NAME++}", file_name.capitalize()).replace("{AUTHOR}", author)
+
+                with open("LICENSE.FRT.txt", "r") as frt_LICENSE:
+                    frt_LICENSE = frt_LICENSE.read()
+
+
+                # Create a new file named 'godot_script.sh' in the destination folder
+                script_file_path = os.path.join(destination_folder_, f'{file_name.capitalize()}.sh')
+                with open(script_file_path, 'w') as script_file:
+                    script_file.write(sh_script)
+
+                port_json_file_path = os.path.join(destination_folder, f'{file_name}.port.json')
+                with open(port_json_file_path, 'w') as port_json_file:
+                    port_json_file.write(port_json)
+
+
+                frt_LICENSE_path  = os.path.join(destination_folder, f'LICENSE.FRT.txt')
+                with open(frt_LICENSE_path, 'w') as frt_LICENSE_path:
+                    frt_LICENSE_path.write(frt_LICENSE)
+
+                # Copy the .gptk file to the 'data' subfolder and rename it to 'godot.gptk'
+                shutil.copy(map_path, os.path.join(data_folder_path, 'godot.gptk'))
+
+                print(f"Script file and data copied to '{destination_folder}'")
+                Messagebox.ok("Port Builded!", title="PORTMK")
+        else:
+            Messagebox.show_error("Please Fill All Fields ", title="PORTMK - Error")
+            print("Please Fill All Fields")
+    except Exception as e:
+        print(e)
 
 
 def get_version_frt(godot_version):
