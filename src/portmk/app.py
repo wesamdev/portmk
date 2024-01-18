@@ -141,7 +141,7 @@ def create_directory(directory_path):
 
 def browse_file():
     global game_path
-    game_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck")])
+    game_path = filedialog.askopenfilename(title="Select a file", filetypes=[("GODOT files", "*.pck"), ("GODOT files", "*.x86_64")])
     # Do something with the file_path, e.g., display it in an Entry widget
     browse_file_Entry.delete(0, "end")
     browse_file_Entry.insert(0, game_path)
