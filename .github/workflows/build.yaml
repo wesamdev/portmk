@@ -28,6 +28,8 @@ jobs:
         pip install pyinstaller
       
     - name: Copy Files
+      working-directory: src/portmk
+
       run: |
         mkdir -p build
         cp -r fonts build/
@@ -35,6 +37,7 @@ jobs:
         cp icon.ico build/
 
     - name: Build
+      working-directory: src/portmk
       run: |
         pyinstaller --onefile --clean --icon icon.ico --name Portmk app.py
 
