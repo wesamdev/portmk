@@ -2,7 +2,7 @@
   "version": 2,
   "name": "{NAME}.zip",
   "items": [
-  "{SCRIPT_NAME}.sh",
+  "{NAME++}.sh",
     "{NAME}"
   ],
   "items_opt": [],
