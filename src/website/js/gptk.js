@@ -114,8 +114,8 @@ const key_maps = {
 };
 
 var back_button = document.getElementById("back_button");
-var start_button = document.getElementById("start_button");
 var select_button = document.getElementById("select_button");
+var start_button = document.getElementById("start_button");
 var a_button = document.getElementById("a_button");
 var b_button = document.getElementById("b_button");
 var x_button = document.getElementById("x_button");
@@ -146,7 +146,7 @@ Object.keys(key_maps).forEach(function (key) {
     var select_button_opt = document.createElement('option');
     select_button_opt.value = key;
     select_button_opt.innerHTML = key_maps[key];
-    start_button.appendChild(select_button_opt);
+    select_button.appendChild(select_button_opt);
 
 
     var start_button_opt = document.createElement('option');
