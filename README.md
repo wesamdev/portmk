@@ -3,11 +3,6 @@
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/wesamdev/portmk?label=latest%20ver)
 
 # PORTMK
-<<<<<<< HEAD
-=======
- this is a tool used to make godot 3.0+ games on [PORTMASTER](https://github.com/christianhaitian/PortMaster)
->>>>>>> 3fc75e8226f2db64e516a206c3eb5bb31f2cfec3
-
 ## About
 
 **PORTMK **is a tool used to make your godot game in portmaster
