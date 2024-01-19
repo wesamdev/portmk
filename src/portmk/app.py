@@ -40,22 +40,13 @@ def build():
 
 
             if check:
-                # _, file_extension = os.path.splitext(game_path)
-                file_extension = os.path.splitext(game_path)[1]
+                _, file_extension = os.path.splitext(game_path)
+                # file_extension = os.path.splitext(game_path)[1]
                 author = author_Entry.get()
                 if file_extension.lower() == '.x86_64':
                     # Copy the file to the destination folder
                     destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
-                    shutil.copy(game_path, destination_folder)
-
-                    # Construct the paths for the source and destination files
-                    source_file = os.path.join(destination_folder, file_name + '.x86_64')
-                    destination_file = os.path.join(destination_folder, file_name + '.pck')
-
-                    # Rename the copied file to have a ".pck" extension
-                    os.rename(source_file, destination_file)
-                    game_path = destination_file
-                    print(f"File copied and renamed to '{destination_folder}'")
+                    copy_and_rename_game_file(destination_folder, file_name)
                 else:
                     #Copy the file to the destination folder
                     destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
@@ -68,7 +59,7 @@ def build():
                 if godotpck.get_godot_info(game_path) is not False:
                     godot_ver, _ = godotpck.get_godot_info(game_path)
                 else:
-                    Messagebox.show_error("please download .net6 desktop runtime", title="PORTMK - Error in godotpckExp (EXPerror)")
+                    Messagebox.show_error("Error in godotpckExp please conntact the support.(ERREXP0)", title="PORTMK - Error in godotpckExp (EXPerror)")
                     return
                 frt_ver = get_version_frt(godot_ver)
                 # check if the version is valid
@@ -110,6 +101,26 @@ def build():
     except Exception as e:
         print(e)
 
+def copy_and_rename_game_file(des,file_name):
+
+
+    # Construct the destination folder path
+
+    # Create the destination folder if it doesn't exist
+    os.makedirs(des, exist_ok=True)
+
+    # Construct the paths for the source and destination files
+    base_name = os.path.join(des, file_name)
+    source_file = base_name + '.x86_64'
+    destination_file = base_name + '.pck'
+
+    # Copy the file to the destination folder
+    shutil.copy(game_path, source_file)
+
+    # Rename the copied file to have a ".pck" extension
+    os.rename(source_file, destination_file)
+    
+    print(f"File copied and renamed to '{destination_file}'")
 
 def get_version_frt(godot_version):
     
@@ -178,7 +189,7 @@ def browse_file_gptk():
 window = ttk.Window(themename="darkly")
 window.geometry("800x600")
 window.resizable(False, False)
-window.title("PORTMK  v0.2-stable")
+window.title("PORTMK  v0.2-dev")
 
 
 #Setup Fonts
@@ -231,7 +242,7 @@ bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primai
 bulid_button.pack(pady=50)
 
 #version text
-version_label = ttk.Label(window, text="v0.2-stable", font=font1)
+version_label = ttk.Label(window, text="v0.2-dev", font=font1)
 version_label.pack(pady=6)
 
 if __name__ == "__main__":
