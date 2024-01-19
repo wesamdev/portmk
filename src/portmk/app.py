@@ -1,4 +1,5 @@
 import shutil
+import webbrowser
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import Messagebox
 import ttkbootstrap as ttk
@@ -216,6 +217,9 @@ browse_file_gptk_Entry.pack(pady=3)
 browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.TButton", command=browse_file_gptk)
 browse_file_gptk_btn.pack(pady=3)
 
+# gptk creator url Button
+ttk.Button(window, text="GPTK Creator", bootstyle=SUCCESS, style="primairy.Outline.TButton", command=lambda: webbrowser.open("https://portmk.pages.dev/gptk.html")).pack(pady=3)
+
 # author
 author_label = ttk.Label(window, text="Author", font=font1)
 author_label.pack(pady=8)
@@ -228,7 +232,7 @@ bulid_button.pack(pady=50)
 
 #version text
 version_label = ttk.Label(window, text="v0.2-dev", font=font1)
-version_label.pack(pady=24)
+version_label.pack(pady=6)
 
 if __name__ == "__main__":
     window.mainloop()
