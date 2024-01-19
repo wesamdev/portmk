@@ -143,6 +143,12 @@ Object.keys(key_maps).forEach(function (key) {
     back_button_opt.innerHTML = key_maps[key];
     back_button.appendChild(back_button_opt);
 
+    var select_button_opt = document.createElement('option');
+    select_button_opt.value = key;
+    select_button_opt.innerHTML = key_maps[key];
+    start_button.appendChild(select_button_opt);
+
+
     var start_button_opt = document.createElement('option');
     start_button_opt.value = key;
     start_button_opt.innerHTML = key_maps[key];
