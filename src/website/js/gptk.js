@@ -115,6 +115,7 @@ const key_maps = {
 
 var back_button = document.getElementById("back_button");
 var start_button = document.getElementById("start_button");
+var select_button = document.getElementById("select_button");
 var a_button = document.getElementById("a_button");
 var b_button = document.getElementById("b_button");
 var x_button = document.getElementById("x_button");
@@ -249,6 +250,7 @@ Object.keys(key_maps).forEach(function (key) {
 });
 
 back_button.value = "enter";
+select_button.value = "enter";
 start_button.value = "esc";
 a_button.value = "enter";
 b_button.value = "enter";
@@ -274,6 +276,7 @@ rstick_right.value = "\\\"";
 function readContent() {
     var content = "";
     content = content + "back = " + document.getElementById("back_button").value + "\n";
+    content = content + "select = " + document.getElementById("select_button").value + "\n";
     content = content + "start = " + document.getElementById("start_button").value + "\n";
     content = content + "\n";
     content = content + "a = " + document.getElementById("a_button").value + "\n";
