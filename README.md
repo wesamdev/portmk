@@ -26,9 +26,9 @@ get godot game pck or x64_86 game file
 
 open portmk and chose game file
 
-#### third 
+#### third
 
-go to [gptk creator] 
+go to [gptk creator]
 
 docs not complated*
 
@@ -42,8 +42,6 @@ docs not complated*
 
   * `portmk` — the app source code.
   * `website` — the source code of the website.
-
-](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.24-windows-x64-installer)
 
 # Developing
 
