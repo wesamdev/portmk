@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/wesamdev/portmk)
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/wesamdev/portmk?label=latest%20ver)
@@ -12,3 +13,5 @@
 [GodotPCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) MIT License
 <br>
 PORTMK  MIT License
+=======
+>>>>>>> Stashed changes
