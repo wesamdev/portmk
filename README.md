@@ -34,7 +34,7 @@ docs not complated*
 
 ## Requirements
 
-.net v6 windows desktp runtime, [DOWNLOAD](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.24-windows-x64-installer).
+.net v6 windows desktop runtime, [DOWNLOAD](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.24-windows-x64-installer).
 
 ## Project Structure
 
