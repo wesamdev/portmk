@@ -311,5 +311,6 @@ function readContent() {
     content = content + "right_analog_left = " + document.getElementById("rstick_left").value + "\n";
     content = content + "right_analog_right = " + document.getElementById("rstick_right").value + "\n";
     document.getElementById("gptk").textContent = content;
+    document.getElementById("download").style.display = "block";
 
 }

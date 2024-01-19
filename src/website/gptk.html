@@ -148,8 +148,32 @@
 
     <div>
         <textarea id="gptk" name="gptk" rows="28" cols="30"></textarea>
-    </div>
-    <script src="./js/gptk.js"></script>
-</body>
+</div>
+        <button onclick="downloadContent()" class="btn btn-success" id="download" style="display: none;">Download (.gptk)</button>
 
+        <script src="./js/gptk.js"></script>
+        <script>
+            function generateContent() {
+                // Your logic to generate content based on form values
+                var content = "Generated Content:\n"; // Replace this with your actual content generation logic
+    
+                // Display the content in the textarea
+                document.getElementById("gptk").value = content;
+            }
+    
+            function downloadContent() {
+                var content = document.getElementById("gptk").value;
+    
+                // Create a Blob with the content
+                var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    
+                // Trigger a click event to download the file
+                var a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = "mapping.gptk";
+                a.click();
+            }
+        </script>
+    </body>
+    
 </html>
