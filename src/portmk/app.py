@@ -218,7 +218,7 @@ browse_file_gptk_btn = ttk.Button(window, text="Browse",style="success.Outline.T
 browse_file_gptk_btn.pack(pady=3)
 
 # gptk creator url Button
-ttk.Button(window, text="GPTK Creator", bootstyle=SUCCESS, style="primairy.Outline.TButton", command=lambda: webbrowser.open("https://portmk.pages.dev/gptk.html")).pack(pady=3)
+ttk.Button(window, text="GPTK Creator", bootstyle=SUCCESS, style="primairy.Outline.TButton", command=lambda: webbrowser.open("https://portmaster.games/gptk.html")).pack(pady=3)
 
 # author
 author_label = ttk.Label(window, text="Author", font=font1)
