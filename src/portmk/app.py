@@ -46,7 +46,7 @@ def build():
                 author = author_Entry.get()
                 if file_extension.lower() == '.x86_64':
                     # Copy the file to the destination folder
-                    if is_platform_windows:
+                    if is_platform_windows():
                         destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
                     else:
                         destination_folder = os.path.join(os.getcwd(), f"{file_name}/{file_name_}")
@@ -54,7 +54,7 @@ def build():
                     copy_and_rename_game_file(destination_folder, file_name)
                 else:
                     #Copy the file to the destination folder
-                    if is_platform_windows:
+                    if is_platform_windows():
                         destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
                     else:
                         destination_folder = os.path.join(os.getcwd(), f"{file_name}/{file_name_}")
@@ -109,8 +109,7 @@ def build():
     except Exception as e:
         print(e)
 def is_platform_windows():
-    is_windows = any(platform.win32_ver())
-    if is_windows:
+    if platform.system() == "Windows":
         return True
     else:
         return False
@@ -206,7 +205,7 @@ window.title("PORTMK  v0.2-dev")
 
 
 #Setup Fonts
-if is_platform_windows:
+if is_platform_windows():
     pyglet.font.add_file(os.getcwd()+"\\fonts\\Poppins-Bold.ttf")
 else:
     pyglet.font.add_file(os.getcwd()+"/fonts/Poppins-Bold.ttf")
