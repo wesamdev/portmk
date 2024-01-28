@@ -7,6 +7,7 @@ import pyglet
 from tkinter import filedialog
 import os
 import godotpck
+import platform
 
 
 
@@ -45,11 +46,18 @@ def build():
                 author = author_Entry.get()
                 if file_extension.lower() == '.x86_64':
                     # Copy the file to the destination folder
-                    destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    if is_platform_windows:
+                        destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    else:
+                        destination_folder = os.path.join(os.getcwd(), f"{file_name}/{file_name_}")
+
                     copy_and_rename_game_file(destination_folder, file_name)
                 else:
                     #Copy the file to the destination folder
-                    destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    if is_platform_windows:
+                        destination_folder = os.path.join(os.getcwd(), f"{file_name}\\{file_name_}")
+                    else:
+                        destination_folder = os.path.join(os.getcwd(), f"{file_name}/{file_name_}")
                     shutil.copy(game_path, destination_folder)
                     print(f"File copied to '{destination_folder}'")
                 
@@ -100,7 +108,12 @@ def build():
             print("Please Fill All Fields")
     except Exception as e:
         print(e)
-
+def is_platform_windows():
+    is_windows = any(platform.win32_ver())
+    if is_windows:
+        return True
+    else:
+        return False
 def copy_and_rename_game_file(des,file_name):
 
 
@@ -193,7 +206,11 @@ window.title("PORTMK  v0.2-dev")
 
 
 #Setup Fonts
-pyglet.font.add_file(os.getcwd()+"\\fonts\\Poppins-Bold.ttf")
+if is_platform_windows:
+    pyglet.font.add_file(os.getcwd()+"\\fonts\\Poppins-Bold.ttf")
+else:
+    pyglet.font.add_file(os.getcwd()+"/fonts/Poppins-Bold.ttf")
+
 font1 = ttk.font.Font(family="Poppins", size=12, weight="bold")
 font2= ttk.font.Font(family="Poppins", size=12, weight="normal")
 
