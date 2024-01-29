@@ -8,7 +8,7 @@ from tkinter import filedialog
 import os
 import godotpck
 import platform
-
+from version import version
 
 
 
@@ -201,7 +201,7 @@ def browse_file_gptk():
 window = ttk.Window(themename="darkly")
 window.geometry("800x600")
 window.resizable(False, False)
-window.title("PORTMK  v0.2-dev")
+window.title("PORTMK  {0}".format(version))
 
 
 #Setup Fonts
@@ -258,7 +258,7 @@ bulid_button = ttk.Button(window, text="Bulid", bootstyle=SUCCESS, style="primai
 bulid_button.pack(pady=50)
 
 #version text
-version_label = ttk.Label(window, text="v0.2-dev", font=font1)
+version_label = ttk.Label(window, text=str(version), font=font1)
 version_label.pack(pady=6)
 
 if __name__ == "__main__":
