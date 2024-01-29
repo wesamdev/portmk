@@ -137,10 +137,12 @@ def copy_and_rename_game_file(des,file_name):
 def get_version_frt(godot_version):
     
     #expermintally added
-    # if "4.0" in godot_version:
-    #     return "4.0.4"
-    # if "4.1" in godot_version:
-    #     return "4.1.3"
+    if "4.0" in godot_version:
+        Messagebox.show_warning("this is expermintally frt version and it is supported on amberelec cfw only.", title="PORTMK - Warning")
+        return "4.0.4"
+    if "4.1" in godot_version:
+        Messagebox.show_warning("this is expermintally frt version and it is supported on amberelec cfw only.", title="PORTMK - Warning")
+        return "4.1.3"
 
     if "3.5" in godot_version:
         return "3.5.2"
