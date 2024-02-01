@@ -72,7 +72,7 @@ Use [Comigo's CSS naming guide](https://cosmomyzrailgorynych.github.io/css-namin
 
 # License
 
-[GodotPCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) MIT License
+[godotpcktool](https://github.com/hhyyrylainen/GodotPckTool) MIT License
 <br>
 PORTMK  MIT License
 
