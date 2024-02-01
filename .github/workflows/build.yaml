@@ -37,7 +37,7 @@ jobs:
       run: |
         mkdir -p dist
         cp -r fonts dist/
-        cp -r GodotPCKExplorer dist/
+        cp -r godotpcktool dist/
         cp icon.ico dist/
         cp LICENSE.FRT.txt dist/
         cp script.txt dist/
