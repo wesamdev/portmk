@@ -1,7 +1,8 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/wesamdev/portmk)
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/wesamdev/portmk?label=latest%20ver)
-
+## Note
+Project Under dev in v1 you can use v0.2-dev if you want.
 # PORTMK
 
 ## About
